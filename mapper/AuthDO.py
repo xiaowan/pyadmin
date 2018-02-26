@@ -6,7 +6,7 @@ from sqlalchemy.types import *
 
 
 class AuthDO(BaseDO):
-    __tablename__='um_auth'
+    __tablename__='py_auth'
 
     name = Column(String, nullable=False)
     code = Column(String, nullable=False)

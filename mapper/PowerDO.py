@@ -6,7 +6,7 @@ from sqlalchemy.types import *
 
 
 class UmPowerDO(BaseDO):
-    __tablename__ = 'um_power'
+    __tablename__ = 'py_power'
 
     power = Column(String, nullable=False)
     name = Column(String, nullable=False)

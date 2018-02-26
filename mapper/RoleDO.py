@@ -6,7 +6,7 @@ from sqlalchemy.types import *
 
 
 class UmRoleDO(BaseDO):
-    __tablename__ = 'um_role'
+    __tablename__ = 'py_role'
 
     role = Column(String, nullable=False)
     alias = Column(String, nullable=False)

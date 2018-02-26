@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from .BaseService import BaseService
-from mapper.UmUserDO import UmUserDO
+from mapper.UserDO import UmUserDO
 from mapper.UserRoleDO import UserRoleDO
 from library.Result import Result
 from library.Exception import UserException

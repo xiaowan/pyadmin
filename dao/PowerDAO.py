@@ -4,7 +4,7 @@
 from sqlalchemy import desc
 from .BaseDAO import BaseDAO
 from library.Decorate import Transaction
-from mapper.UmPowerDO import UmPowerDO
+from mapper.PowerDO import UmPowerDO
 
 
 class PowerDAO(BaseDAO):

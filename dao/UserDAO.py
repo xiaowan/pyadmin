@@ -5,7 +5,7 @@ import requests
 from sqlalchemy import desc
 from .BaseDAO import BaseDAO
 from library.Exception import RPCException
-from mapper.UmUserDO import UmUserDO
+from mapper.UserDO import UmUserDO
 from mapper.UserRoleDO import UserRoleDO
 
 

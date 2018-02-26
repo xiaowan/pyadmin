@@ -6,7 +6,7 @@ from sqlalchemy.types import *
 
 
 class UmUserDO(BaseDO):
-    __tablename__ = 'um_user'
+    __tablename__ = 'py_user'
 
     loginname = Column(String, nullable=True)
     nickname = Column(String, nullable=True)

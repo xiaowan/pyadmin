@@ -4,7 +4,7 @@
 from sqlalchemy import desc
 from .BaseDAO import BaseDAO
 from library.Decorate import Transaction
-from mapper.UmRoleDO import UmRoleDO
+from mapper.RoleDO import UmRoleDO
 
 
 class RoleDAO(BaseDAO):

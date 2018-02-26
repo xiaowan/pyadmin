@@ -35,10 +35,4 @@ class BaseObj(Base):
     create_time = Column(Integer, default=lambda: int(time.time()))
 
 
-class CommonObj(Base):
-    id = Column(Integer, primary_key=True, autoincrement=True)
-
-
-OriginalDO = declarative_base(cls=Base)
 BaseDO = declarative_base(cls=BaseObj)
-CommonDO = declarative_base(cls=CommonObj)

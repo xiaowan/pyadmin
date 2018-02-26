@@ -1,5 +1,5 @@
 from sqlalchemy.orm import scoped_session
-from mapper import UnitymobSession
+from mapper.init import UnitymobSession
 from conf import conf
 from .Decorate import Singleton
 from library.MyRedis import MyRedis

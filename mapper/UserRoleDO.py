@@ -6,7 +6,7 @@ from sqlalchemy.types import *
 
 
 class UserRoleDO(BaseDO):
-    __tablename__ = 'um_user_role'
+    __tablename__ = 'py_user_role'
 
     uid = Column(Integer, nullable=False)
     role = Column(String, nullable=False)
