@@ -1,13 +1,12 @@
-
-
 from sqlalchemy.orm import scoped_session
-from mapper import PySession
+from mapper import UnitymobSession
 from conf import conf
 from .Decorate import Singleton
 from library.MyRedis import MyRedis
 from library.MyRabbitmq import MyRabbitmq
 from library.RPCClient import RPCClient
 from library.Utils import Utils
+from tornado.ioloop import IOLoop
 
 
 @Singleton
@@ -18,9 +17,13 @@ class G(object):
         self._session = None
 
     @property
+    def currentIOloopInstance(self):
+        return IOLoop.current()
+
+    @property
     def session(self):
         if self._session is None:
-            self._session = scoped_session(PySession)
+            self._session = scoped_session(UnitymobSession)
         return self._session
 
     @property
@@ -44,4 +47,3 @@ class G(object):
         self._session = None
 
         del self.rabbitmq.channel
-

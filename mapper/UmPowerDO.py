@@ -5,8 +5,9 @@ from sqlalchemy import Column
 from sqlalchemy.types import *
 
 
-class RoleDO(BaseDO):
-    __tablename__='py_role'
+class UmPowerDO(BaseDO):
+    __tablename__ = 'um_power'
 
+    power = Column(String, nullable=False)
     name = Column(String, nullable=False)
-    code = Column(String, nullable=False)
+    desc = Column(Text, nullable=False)

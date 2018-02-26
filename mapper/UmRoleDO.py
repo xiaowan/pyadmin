@@ -5,8 +5,9 @@ from sqlalchemy import Column
 from sqlalchemy.types import *
 
 
-class UserRolesDO(BaseDO):
-    __tablename__='py_user_roles'
+class UmRoleDO(BaseDO):
+    __tablename__ = 'um_role'
 
-    uid = Column(String, nullable=False)
     role = Column(String, nullable=False)
+    alias = Column(String, nullable=False)
+    desc = Column(Text, nullable=False)

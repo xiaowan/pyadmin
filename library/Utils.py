@@ -1,12 +1,12 @@
-
 import json
+import time
 from decimal import Decimal
-from datetime import datetime
+from datetime import datetime, date
 import hashlib
+from conf import conf
 
 
 class Utils(object):
-
     @staticmethod
     def JSONEncoder():
         class JSONEncoder(json.JSONEncoder):
@@ -14,15 +14,19 @@ class Utils(object):
             Wrapper class to try calling an object's tojson() method. This allows
             us to JSONify objects coming from the ORM. Also handles dates and datetimes.
             """
+
             def default(self, obj):
                 if isinstance(obj, Decimal):
                     return float(obj)
                 if isinstance(obj, datetime):
                     return str(obj)
+                if isinstance(obj, date):
+                    return str(obj)
                 try:
-                    return obj.dict
+                    return obj.tojson()
                 except AttributeError:
                     return json.JSONEncoder.default(self, obj)
+
         return JSONEncoder
 
     @staticmethod
@@ -30,3 +34,18 @@ class Utils(object):
         m2 = hashlib.md5()
         m2.update("{str}".format(str=str).encode("utf-8"))
         return m2.hexdigest()
+
+    @staticmethod
+    def get_key(key):
+        """ 拼装 redis key """
+        return "{prefix}{key}".format(prefix=conf.redis.prefix, key=key)
+
+    @staticmethod
+    def page_start(current_page, page_num):
+        """ 计算指定分页的偏移量 """
+        current_page = int(current_page) if int(current_page) > 1 else 1
+        return (current_page - 1) * page_num
+
+    @staticmethod
+    def currentTime(format='%Y-%m-%d %H:%M:%S'):
+        return time.strftime(format, time.localtime(int(time.time())))

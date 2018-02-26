@@ -2,14 +2,8 @@
 # -*- coding:utf-8 -*-
 
 from controllers import User
-from controllers import Tool
 from controllers import Role
-from controllers import Auth
+from controllers import Power
+from controllers import Tool
 
-urls = []
-urls.extend(User.route)
-urls.extend(Tool.route)
-urls.extend(Role.route)
-urls.extend(Auth.route)
-
-
+from library.Route import route

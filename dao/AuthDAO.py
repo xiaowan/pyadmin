@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 from .BaseDAO import BaseDAO
 from mapper.AuthDO import AuthDO
 from mapper.RoleAuthsDO import RoleAuthsDO

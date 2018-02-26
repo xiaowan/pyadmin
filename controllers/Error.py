@@ -1,8 +1,9 @@
-#!/usr/bin/env python
+import json
+from tornado.web import RequestHandler
+from library.Result import Result
 
-from tornado.web import  RequestHandler
 
-class NotFoundHandler (RequestHandler):
+class NotFoundHandler(RequestHandler):
     def get(self, *args, **kwargs):
-        self.write("这里是404页面")
-
+        self.set_status(404)
+        self.write(json.dumps(Result(code=404, msg="NOT FOUND!").json()))

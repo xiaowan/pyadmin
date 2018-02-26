@@ -1,4 +1,3 @@
-
 from library.G import G
 from library.Decorate import DI
 
@@ -30,5 +29,14 @@ class BaseDAO():
         return self.g.session
 
     @property
+    def jolly_session(self):
+        return self.g.jolly_session
+
+    @property
     def rpc(self):
         return self.g.rpc
+
+    class ImageType(object):
+        carousel = 'Carousel'
+        single = 'Single-Image'
+        video = 'Video'

@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import time
-from uuid import uuid4
 from sqlalchemy import Integer
 from sqlalchemy import Column
 from sqlalchemy.ext.declarative import declarative_base
@@ -12,16 +11,34 @@ class Base(object):
         'mysql_charset': 'utf8mb4'
     }
 
-    id = Column(Integer, primary_key=True, default=lambda: str(uuid4()))
-    create_time = Column(Integer, default=lambda: int(time.time()))
+    @property
+    def columns(self):
+        return [c.name for c in self.__table__.columns]
+
+    @property
+    def columnitems(self):
+        return dict([(c, getattr(self, c)) for c in self.columns])
 
     @property
     def dict(self):
         return {c.name: getattr(self, c.name, None) for c in self.__table__.columns}
 
     def __repr__(self):
-        return '{}({})'.format(self.__class__.__name__, self.dict)
+        return '{}({})'.format(self.__class__.__name__, self.columnitems)
 
-BaseDO = declarative_base(cls=Base)
+    def tojson(self):
+        return self.columnitems
 
 
+class BaseObj(Base):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    create_time = Column(Integer, default=lambda: int(time.time()))
+
+
+class CommonObj(Base):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+
+
+OriginalDO = declarative_base(cls=Base)
+BaseDO = declarative_base(cls=BaseObj)
+CommonDO = declarative_base(cls=CommonObj)

@@ -13,11 +13,10 @@ from service.UserService import UserService
 
 
 class BaseHandler(RequestHandler):
-
     uid = None
     token = None
 
-    def __init__(self, application, request, **kwargs ):
+    def __init__(self, application, request, **kwargs):
         context.RequestContext()
         self.post_arguments = {}
         super(BaseHandler, self).__init__(application, request, **kwargs)
@@ -32,14 +31,12 @@ class BaseHandler(RequestHandler):
 
         if self.request.path not in ["/user/login"]:
             token = self.request.headers.get("X-Token", None)
-            try :
+            try:
                 assert token is not None
                 data = UserService().get_user_by_token(token)
                 if data is not None:
                     self.uid = data['id']
                     self.token = token
-                    # 判断该用户是否有该接口的使用权
-                    UserService().have_power(self.uid, self.request.path)
                 else:
                     raise CustomException(code=1001)
             except AssertionError as ae:
@@ -51,7 +48,7 @@ class BaseHandler(RequestHandler):
             pass
 
     def write_error(self, status_code, **kwargs):
-        if isinstance(kwargs.get('exc_info')[1], CustomException ):
+        if isinstance(kwargs.get('exc_info')[1], CustomException):
             ce = kwargs.get('exc_info')[1]
             self.set_status(200)
             return self.json(Result(code=ce.code, msg=ce.msg))
@@ -60,17 +57,17 @@ class BaseHandler(RequestHandler):
 
     def set_default_headers(self):
         self.set_header("Access-Control-Allow-Origin", "*")
-        self.set_header("Access-Control-Allow-Headers", "X-Token, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
+        self.set_header("Access-Control-Allow-Headers",
+                        "X-Token, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def on_finish(self):
-        # 清理资源
+        """ 清理资源 """
         G().clear()
 
     def json(self, result):
-        self.write(json.dumps(result.json(), cls=Utils.JSONEncoder()))
+        self.write(json.dumps(result.json(), cls=Utils.JSONEncoder(), sort_keys=False))
         self.finish()
 
     def options(self, *args, **kwargs):
         self.set_status(204)
-

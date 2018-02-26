@@ -1,24 +1,30 @@
-
 from sqlalchemy.orm import scoped_session
 from library.Exception import CustomException
+from library.Result import Result
 
 
 def DI(**kwargs):
     """ 注入装饰 """
+
     def outer(cls):
         for x in kwargs:
             setattr(cls, x, kwargs.get(x))
         return cls
+
     return outer
+
 
 def Singleton(cls):
     """ 单例 """
     _instance = {}
+
     def _singleton(*args, **kargs):
         if cls not in _instance:
             _instance[cls] = cls(*args, **kargs)
         return _instance[cls]
+
     return _singleton
+
 
 def Transaction(name=None):
     """
@@ -28,12 +34,13 @@ def Transaction(name=None):
         b. 传入session对象对应的类书属性名称
     如果出现exception ,直接上抛异常给调用方
     """
+
     def outer(func):
         def _deco(self, *args, **kwargs):
             if name is not None and hasattr(self, name):
                 session = getattr(self, name)
                 if isinstance(session, scoped_session):
-                    try :
+                    try:
                         res = func(self, *args, **kwargs)
                         session.commit()
                         return res
@@ -47,6 +54,32 @@ def Transaction(name=None):
                         pass
             else:
                 print("找不到session对象，无法开启自动事务")
+
         return _deco
+
     return outer
 
+
+def Return(func):
+    """
+    拦截方法返回，controller 层方法无需再手动编写返回代码
+    :return: Result 对象
+    """
+
+    def _deco(self, *args, **kwargs):
+        res = func(self, *args, **kwargs)
+        if not isinstance(res, Result):
+            res = Result(code=0, data=res)
+
+        self.json(res)
+
+    return _deco
+
+
+def Deprecated(func):
+    """ 废弃方法装饰器 """
+
+    def _deco(self, *args, **kwargs):
+        raise CustomException(code=1003, desc="{path} 已经废弃".format(path=self.request.path))
+
+    return _deco

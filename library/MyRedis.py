@@ -26,4 +26,3 @@ class MyRedis(object):
             return pickle.loads(data)
         except AssertionError as ae:
             return None
-

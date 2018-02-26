@@ -5,8 +5,8 @@ from sqlalchemy import Column
 from sqlalchemy.types import *
 
 
-class RoleAuthsDO(BaseDO):
-    __tablename__='um_role_auths'
+class UserRoleDO(BaseDO):
+    __tablename__ = 'um_user_role'
 
+    uid = Column(Integer, nullable=False)
     role = Column(String, nullable=False)
-    auth_id = Column(String, nullable=False)
