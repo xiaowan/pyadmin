@@ -2,20 +2,20 @@
 
 
 要求python版本为3.5+，使用到的第三方库：  
-tornado 作为基础框架  
-oslo.config 作为配置管理  
-oslo.context 作为请求分配request_id，如果以后收集日志至类似ELK环境中，可使用request_id 来查询。 
-oslo.log 日志管理。 
-sqlalchemy 作为mysql mapper  
-pika  操作rabbitmq  
-redis 操作redis，目前登陆token存放在redis中  
+&ensp;&ensp;tornado 作为基础框架  
+&ensp;&ensp;oslo.config 作为配置管理  
+&ensp;&ensp;oslo.context 作为请求分配request_id，如果以后收集日志至类似ELK环境中，可使用request_id 来查询 
+&ensp;&ensp;oslo.log 日志管理 
+&ensp;&ensp;sqlalchemy 作为mysql mapper  
+&ensp;&ensp;pika  操作rabbitmq  
+&ensp;&ensp;redis 操作redis，目前登陆token存放在redis中  
 
 
 此脚手架使用openstack的 oslo.config 作为配置管理，目前区分三个环境，分别是线上环境(conf)，开发环境(debug)，预览环境(pre)。
 指定环境有三种方式  
-1. 项目启动时使用 --config-file=conf/xxx.ini 来读取指定配置。  
-2. 设置 UNITYMOB_ENVIRON 环境变量，变量值分别为 conf, debug, pre ，分别对应上述三个环境。  
-3. 如果不指定配置文件，也没有设置环境变量，则默认使用conf环境的配置。  
+&ensp;&ensp;1. 项目启动时使用 --config-file=conf/xxx.ini 来读取指定配置。  
+&ensp;&ensp;2. 设置 UNITYMOB_ENVIRON 环境变量，变量值分别为 conf, debug, pre ，分别对应上述三个环境。  
+&ensp;&ensp;3. 如果不指定配置文件，也没有设置环境变量，则默认使用conf环境的配置。  
 如果同时设置了方式一和方式二，方式一的优先级级别最高。  
 
 
