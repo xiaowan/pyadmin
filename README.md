@@ -47,7 +47,9 @@
  - Transaction 需要使用事务的地方，函数执行结束会自动提交事务，如执行失败会上抛该函数异常，并且回滚事务。
  - Return controller层返回结果的封装，确保返回结果被放到了Result类中
  - Deprecated 已废弃方法如果代码没有及时删除，可使用该装饰器提示。
+ 
+ ---
 
 下图为使用上述前端框架开发的sqlalchemy mapper 生成工具，具体代码正在整理中，后续更新上来。
-![image](https://github.com/xiaowan/py-deploy/blob/master/snapshot/%E9%A6%96%E9%A1%B5.gif)
+![image](https://github.com/xiaowan/pyadmin/blob/master/snapshot/mappertool.jpeg)
  
