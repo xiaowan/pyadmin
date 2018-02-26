@@ -49,5 +49,5 @@
  - Deprecated 已废弃方法如果代码没有及时删除，可使用该装饰器提示。
 
 下图为使用上述前端框架开发的sqlalchemy mapper 生成工具，具体代码正在整理中，后续更新上来。
-![image](https://github.com/xiaowan/py-deploy/blob/master/snapshot/%E9%A6%96%E9%A1%B5.gif)
+![image](https://github.com/xiaowan/pyadmin/blob/master/snapshot/mappertool.jpeg)
  
