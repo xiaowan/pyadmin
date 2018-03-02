@@ -1,5 +1,6 @@
 **简介**
-该脚手架可快速为管理后台提供restful接口，框架前端使用 https://github.com/PanJiaChen/vue-element-admin
+该脚手架可快速为管理后台提供restful接口，框架前端使用 https://github.com/PanJiaChen/vue-element-admin  
+框架自带一个简单的RBAC以及web操作界面
 
 **要求python版本为3.5+，使用到的第三方库：**  
  - tornado 作为基础框架
@@ -51,5 +52,13 @@
  ---
 
 下图为使用上述前端框架开发的sqlalchemy mapper 生成工具，具体代码正在整理中，后续更新上来。
-![image](https://github.com/xiaowan/pyadmin/blob/master/snapshot/mappertool.jpeg)
+![image](https://github.com/xiaowan/pyadmin/blob/master/snapshot/WechatIMG140.jpeg)
+
+![image](https://github.com/xiaowan/pyadmin/blob/master/snapshot/WechatIMG141.jpeg)
+
+![image](https://github.com/xiaowan/pyadmin/blob/master/snapshot/WechatIMG142.jpeg)
+
+![image](https://github.com/xiaowan/pyadmin/blob/master/snapshot/WechatIMG143.jpeg)
+
+![image](https://github.com/xiaowan/pyadmin/blob/master/snapshot/WechatIMG139.jpeg)
  
