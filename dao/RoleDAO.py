@@ -4,6 +4,7 @@
 from sqlalchemy import desc
 from .BaseDAO import BaseDAO
 from mapper.RoleDO import RoleDO
+from mapper.RoleAuthsDO import RoleAuthsDO
 
 
 class RoleDAO(BaseDAO):
@@ -18,3 +19,11 @@ class RoleDAO(BaseDAO):
         """ 添加角色 """
         self.session.add(obj)
         self.session.flush()
+
+    def get_auths_by_role(self, role=None):
+        """ 指定role下的所有权限点 """
+        return self.session.query(RoleAuthsDO).filter(RoleAuthsDO.role == role).all()
+
+    def remove_auths_for_role(self, role, auths=[]):
+        return self.session.query(RoleAuthsDO).filter(RoleAuthsDO.auth_id.in_(auths)).filter(RoleAuthsDO.role == role).delete(synchronize_session=False)
+

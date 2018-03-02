@@ -36,7 +36,11 @@ class BaseDAO():
     def rpc(self):
         return self.g.rpc
 
-    class ImageType(object):
-        carousel = 'Carousel'
-        single = 'Single-Image'
-        video = 'Video'
+    def save(self, obj):
+        """ 保存对象，支持批量写入"""
+        if isinstance(obj, list):
+            res = self.session.add_all(obj)
+        else:
+            res = self.session.add(obj)
+        self.session.flush()
+        return res
