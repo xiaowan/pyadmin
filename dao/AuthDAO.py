@@ -5,7 +5,7 @@ from mapper.RoleAuthsDO import RoleAuthsDO
 
 class AuthDAO(BaseDAO):
     """ 权限相关原子操作 """
-    def get_auth(self):
+    def get_auths(self):
         """ 获取所有auth """
         return self.session.query(AuthDO).all()
 

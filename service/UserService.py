@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from .BaseService import BaseService
-from mapper.UserDO import UmUserDO
+from mapper.UserDO import UserDO
 from mapper.UserRoleDO import UserRoleDO
 from library.Result import Result
 from library.Exception import UserException
@@ -41,10 +41,10 @@ class UserService(BaseService):
                 data = user.columnitems
                 data['token'] = user.token
                 # 获取用的所有角色
-                data['role'] = []
+                data['roles'] = []
                 roles = self.userDAO.get_user_roles(user.id)
                 if roles:
-                    data['role'].extend([role.role for role in roles])
+                    data['roles'].extend([role.role for role in roles])
                 self.userDAO.update_user_info(user.id, token=user.token)
                 # 将token存到redis中
                 res = self.redis.setex(self.token_key(user.token), 24 * 60 * 60 * 30, data)
@@ -68,7 +68,7 @@ class UserService(BaseService):
     @Transaction(name="session")
     def add_user(self, loginname=None, nickname=None, password=None, is_valid=1):
         """ 添加用户 """
-        user = UmUserDO()
+        user = UserDO()
         user.loginname = loginname
         user.nickname = nickname
         user.password = self.utils.md5(password)

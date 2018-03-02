@@ -8,5 +8,5 @@ from sqlalchemy.types import *
 class UserRoleDO(BaseDO):
     __tablename__ = 'py_user_role'
 
-    uid = Column(Integer, nullable=False)
+    uid = Column(String, nullable=False)
     role = Column(String, nullable=False)

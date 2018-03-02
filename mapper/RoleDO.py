@@ -5,9 +5,9 @@ from sqlalchemy import Column
 from sqlalchemy.types import *
 
 
-class UmRoleDO(BaseDO):
+class RoleDO(BaseDO):
     __tablename__ = 'py_role'
 
     role = Column(String, nullable=False)
-    alias = Column(String, nullable=False)
+    name = Column(String, nullable=False)
     desc = Column(Text, nullable=False)

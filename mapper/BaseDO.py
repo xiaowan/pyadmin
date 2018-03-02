@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 import time
-from sqlalchemy import Integer
+from uuid import uuid4
+from sqlalchemy import String, Integer
 from sqlalchemy import Column
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -31,7 +32,7 @@ class Base(object):
 
 
 class BaseObj(Base):
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(String, primary_key=True, default=lambda: str(uuid4()))
     create_time = Column(Integer, default=lambda: int(time.time()))
 
 

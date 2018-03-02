@@ -89,7 +89,7 @@ class AddUserHandler(BaseHandler):
         return Result(code=0)
 
 
-@route(r"/user/addrole")
+@route(r"/user/role/add")
 class AddRoleForUserHandler(BaseHandler):
     @Return
     def post(self, *args, **kwargs):
@@ -98,7 +98,7 @@ class AddRoleForUserHandler(BaseHandler):
         return UserService().user_add_roles(uid, roles)
 
 
-@route(r"/user/delrole")
+@route(r"/user/role/del")
 class DelRoleForUserHandler(BaseHandler):
     @Return
     def post(self, *args, **kwargs):

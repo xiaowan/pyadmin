@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 
 import uuid
-import requests
 from sqlalchemy import desc
 from .BaseDAO import BaseDAO
-from library.Exception import RPCException
-from mapper.UserDO import UmUserDO
+from mapper.UserDO import UserDO
 from mapper.UserRoleDO import UserRoleDO
 
 
@@ -18,11 +16,11 @@ class UserDAO(BaseDAO):
 
     def get_user_by_username(self, username):
         """ 根据用户名获取用户信息 """
-        return self.session.query(UmUserDO).filter(UmUserDO.loginname == username).first()
+        return self.session.query(UserDO).filter(UserDO.loginname == username).first()
 
     def get_user_by_id(self, uid=None):
         """ 根据uid 获取用户 """
-        return self.session.query(UmUserDO).filter(UmUserDO.id == uid).first()
+        return self.session.query(UserDO).filter(UserDO.id == uid).first()
 
     def get_user_by_token(self, token=None):
         """ 根据用户token获取用户信息 """
@@ -30,11 +28,11 @@ class UserDAO(BaseDAO):
 
     def update_user_info(self, uid=None, **kwargs):
         """ 更新用户信息 """
-        return self.session.query(UmUserDO).filter(UmUserDO.id == uid).update(kwargs)
+        return self.session.query(UserDO).filter(UserDO.id == uid).update(kwargs)
 
     def get_users(self):
         """ 获取用户 """
-        return self.session.query(UmUserDO).order_by(desc(UmUserDO.id)).all()
+        return self.session.query(UserDO).order_by(desc(UserDO.id)).all()
 
     def add_user(self, user=None):
         """ 批量添加用户 """
