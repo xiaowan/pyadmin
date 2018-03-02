@@ -45,6 +45,8 @@ class UserService(BaseService):
                 roles = self.userDAO.get_user_roles(user.id)
                 if roles:
                     data['roles'].extend([role.role for role in roles])
+                else:
+                    raise UserException(11012)
                 self.userDAO.update_user_info(user.id, token=user.token)
                 # 将token存到redis中
                 res = self.redis.setex(self.token_key(user.token), 24 * 60 * 60 * 30, data)
@@ -137,7 +139,7 @@ class UserService(BaseService):
     def have_power(self, uid=None, auth=None):
         """" 判断用户是否有权限使用该接口 """
         # 用户所有角色
-        roles = self.roleDAO.get_user_roles(uid)
+        roles = self.userDAO.get_user_roles(uid)
         roles = [role.role for role in roles]
         # 权限对象
         auth_obj = self.authDAO.get_auth_by_code(auth)

@@ -39,6 +39,9 @@ class BaseHandler(RequestHandler):
                     self.token = token
                 else:
                     raise CustomException(code=1001)
+
+                UserService().have_power(self.uid, self.request.path)
+
             except AssertionError as ae:
                 raise CustomException(code=1002)
 

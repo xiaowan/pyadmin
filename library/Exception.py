@@ -48,6 +48,7 @@ class UserException(CustomException):
     error_11005 = '用户角色新增失败'
     error_11006 = '用户角色删除失败'
     error_11011 = '该用户已存在，无法重复添加'
+    error_11012 = '该用户未分配角色，暂时无法登陆系统'
 
 class AuthException(CustomException):
     """ 权限类异常 """
