@@ -31,11 +31,12 @@ class AuthService(BaseService):
 
         return self.authDAO.add_auth(auth_obj)
 
-
     def get_new_auths(self):
         """ 获取所有未被添加的权限 """
-        auths = []
-        urls = route.get_urls()
-        for auth in urls:
-            auths.append(auth[0])
+        exists_auth = self.authDAO.get_auths()
+        exists_auth_list = [ auth.code for auth in exists_auth ]
+
+        url_mappers = route.get_urls()
+        auths = [ url_mapper[0] for url_mapper in url_mappers if url_mapper[0] not in exists_auth_list ]
+
         return auths

@@ -52,3 +52,6 @@ class UserException(CustomException):
 class AuthException(CustomException):
     """ 权限类异常 """
     error_12000 = '该权限已经存在，无法重复添加'
+
+class RoleException(CustomException):
+    error_13000 = '该角色已经存在，无法添加'
