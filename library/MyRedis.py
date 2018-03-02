@@ -2,13 +2,18 @@
 
 import redis
 import pickle
-from library.Decorate import Singleton
 
 
-@Singleton
 class MyRedis(object):
     """ redis 单例模块 """
     redis = None
+    _instance = None
+
+    @classmethod
+    def getInstance(cls, host, port, password, decode_responses):
+        if cls._instance is None:
+            cls._instance = cls(host, port, password, decode_responses)
+        return cls._instance
 
     def __init__(self, host, port, password, decode_responses):
         self.redis = redis.StrictRedis(host=host, port=port, password=password, decode_responses=decode_responses)

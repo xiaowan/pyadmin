@@ -66,7 +66,7 @@ class BaseHandler(RequestHandler):
 
     def on_finish(self):
         """ 清理资源 """
-        G().clear()
+        G.getInstance().clear()
 
     def json(self, result):
         self.write(json.dumps(result.json(), cls=Utils.JSONEncoder(), sort_keys=False))

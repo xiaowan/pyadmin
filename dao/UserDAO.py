@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import uuid
+from library.Decorate import Cache
 from sqlalchemy import desc
 from .BaseDAO import BaseDAO
 from mapper.UserDO import UserDO

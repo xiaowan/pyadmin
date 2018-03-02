@@ -4,6 +4,7 @@ from decimal import Decimal
 from datetime import datetime, date
 import hashlib
 from conf import conf
+import pickle
 
 
 class Utils(object):
@@ -34,6 +35,11 @@ class Utils(object):
         m2 = hashlib.md5()
         m2.update("{str}".format(str=str).encode("utf-8"))
         return m2.hexdigest()
+
+    @staticmethod
+    def _compute_key(function, args, kw):
+        key = pickle.dumps((function.__name__, args, kw))
+        return hashlib.sha1(key).hexdigest()
 
     @staticmethod
     def get_key(key):

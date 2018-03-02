@@ -1,7 +1,6 @@
 from sqlalchemy.orm import scoped_session
 from mapper.init import UnitymobSession
 from conf import conf
-from .Decorate import Singleton
 from library.MyRedis import MyRedis
 from library.MyRabbitmq import MyRabbitmq
 from library.RPCClient import RPCClient
@@ -9,8 +8,15 @@ from library.Utils import Utils
 from tornado.ioloop import IOLoop
 
 
-@Singleton
 class G(object):
+    _instance = None
+
+    @classmethod
+    def getInstance(cls):
+        if cls._instance is None:
+            cls._instance = cls()
+        return cls._instance
+
     def __init__(self):
         self.conf = conf
         self.utils = Utils
@@ -28,7 +34,8 @@ class G(object):
 
     @property
     def redis(self):
-        return MyRedis(host=conf.redis.host, port=conf.redis.port, password=conf.redis.password, decode_responses=False)
+        return MyRedis.getInstance(host=conf.redis.host, port=conf.redis.port, password=conf.redis.password,
+                                   decode_responses=False)
 
     @property
     def rabbitmq(self):

@@ -4,7 +4,7 @@ from library.Decorate import DI
 from library.G import G
 
 
-@DI(g=G())
+@DI(g=G.getInstance())
 class BaseService(object):
     @property
     def session(self):

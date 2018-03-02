@@ -2,7 +2,7 @@ from library.G import G
 from library.Decorate import DI
 
 
-@DI(g=G())
+@DI(g=G.getInstance())
 class BaseDAO():
     _instance = None
 

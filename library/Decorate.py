@@ -1,6 +1,10 @@
+#!/usr/bin/env python
+
 from sqlalchemy.orm import scoped_session
 from library.Exception import CustomException
 from library.Result import Result
+from library.Utils import Utils
+from library.MyRedis import MyRedis
 
 
 def DI(**kwargs):
@@ -83,3 +87,34 @@ def Deprecated(func):
         raise CustomException(code=1003, desc="{path} 已经废弃".format(path=self.request.path))
 
     return _deco
+
+
+def Cache(name='redis', time=3000):
+    """
+    缓存
+    """
+
+    def outer(func):
+        def _deco(self, *args, **kwargs):
+            cache_key = Utils._compute_key(func, args, kwargs)
+            if hasattr(self, name):
+                cache_obj = getattr(self, name, None)
+                if isinstance(cache_obj, MyRedis):
+                    data = cache_obj.get(cache_key)
+                    if data is None:
+                        print("没有命中缓存,执行函数")
+                        data = func(self, *args, **kwargs)
+                        print("将数据加入到缓存中")
+                        cache_obj.setex(cache_key, time, data)
+                    else:
+                        print("命中缓存")
+                else:
+                    data = func(self, *args, **kwargs)
+            else:
+                data = func(self, *args, **kwargs)
+
+            return data
+
+        return _deco
+
+    return outer
