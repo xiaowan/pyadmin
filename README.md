@@ -51,7 +51,7 @@
  
  ---
 
-下图为使用上述前端框架开发的sqlalchemy mapper 生成工具，具体代码正在整理中，后续更新上来。
+部分功能截图如下：
 ![image](https://github.com/xiaowan/pyadmin/blob/master/snapshot/WechatIMG140.jpeg)
 
 ![image](https://github.com/xiaowan/pyadmin/blob/master/snapshot/WechatIMG141.jpeg)
