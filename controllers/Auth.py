@@ -28,3 +28,10 @@ class AddAuthHandler(BaseHandler):
             raise UserException(code=10001, desc="请填写权限点名称")
 
         return AuthService().add_auth(name=name, auth_code=auth)
+
+
+@route(r"/auth/newauths")
+class NewAuthsHandler(BaseHandler):
+    @Return
+    def get(self, *args, **kwargs):
+        return AuthService().get_new_auths()

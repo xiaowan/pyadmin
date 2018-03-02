@@ -68,6 +68,10 @@ class UserService(BaseService):
     @Transaction(name="session")
     def add_user(self, loginname=None, nickname=None, password=None, is_valid=1):
         """ 添加用户 """
+        userinfo = UserService().get_user_by_username(loginname)
+        if userinfo:
+            raise UserException(code=11011)
+
         user = UserDO()
         user.loginname = loginname
         user.nickname = nickname

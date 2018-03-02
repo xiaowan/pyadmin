@@ -66,20 +66,18 @@ class AddUserHandler(BaseHandler):
         loginname = self.post_arguments.get("loginname", None)
         nickname = self.post_arguments.get("nickname", None)
         password = self.post_arguments.get("password", None)
-        password_ok = self.post_arguments.get("password_ok", None)
+        checkPass = self.post_arguments.get("checkPass", None)
         is_valid = self.post_arguments.get("is_valid", None)
         if loginname is None:
             raise UserException(code=10001, desc="loginname不能为空")
-        else:
-            user = UserService().get_user_by_username(loginname)
-            if user:
-                raise UserException(code=11011)
+
         if nickname is None:
             raise UserException(code=10001, desc="nickname不能为空")
         if password is None:
             raise UserException(code=10001, desc="密码不能为空")
-        if password != password_ok:
+        if password != checkPass:
             raise UserException(code=10001, desc="两次密码不一致")
+
         UserService().add_user(
             loginname=loginname,
             nickname=nickname,
