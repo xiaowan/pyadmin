@@ -14,6 +14,14 @@ class AllAuthHandler(BaseHandler):
         return AuthService().get_all_auths()
 
 
+@route(r'/auth/canassign')
+class AuthCanAssignHandler(BaseHandler):
+    @Return
+    def get(self, *args, **kwargs):
+        """ 可以被分配给角色的权限 """
+        return AuthService().get_assign_for_role()
+
+
 @route(r'/auth/add')
 class AddAuthHandler(BaseHandler):
     @Return

@@ -111,7 +111,3 @@ class GetUserRoleHandler(BaseHandler):
     def get(self, *args, **kwargs):
         uid = self.get_argument("uid", default=None)
         return UserService().get_user_roles(uid)
-
-
-
-

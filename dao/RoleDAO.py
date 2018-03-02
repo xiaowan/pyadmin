@@ -22,7 +22,11 @@ class RoleDAO(BaseDAO):
 
     def get_auths_by_role(self, role=None):
         """ 指定role下的所有权限点 """
-        return self.session.query(RoleAuthsDO).filter(RoleAuthsDO.role == role).all()
+        query = self.session.query(RoleAuthsDO)
+        if role is not None:
+            query = query.filter(RoleAuthsDO.role == role)
+
+        return query.all()
 
     def remove_auths_for_role(self, role, auths=[]):
         return self.session.query(RoleAuthsDO).filter(RoleAuthsDO.auth_id.in_(auths)).filter(RoleAuthsDO.role == role).delete(synchronize_session=False)

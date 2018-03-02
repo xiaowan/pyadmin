@@ -113,7 +113,6 @@ class UserService(BaseService):
         """ 获取用户所有所属business """
         return self.userDAO.get_user_business(uid)
 
-
     @Transaction(name="session")
     def allow_user_login(self, uid):
         """ 允许指定用户登陆 """
