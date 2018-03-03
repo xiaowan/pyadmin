@@ -1,6 +1,9 @@
 **简介**
 该脚手架可快速为管理后台提供restful接口，框架前端使用 https://github.com/PanJiaChen/vue-element-admin  
-框架自带一个简单的RBAC以及web操作界面，web界面地址：https://github.com/xiaowan/pyadmin-ui
+框架自带一个简单的RBAC以及web操作界面，web界面地址：https://github.com/xiaowan/pyadmin-ui  
+数据库表及部分数据在dbinfo 目录内  
+测试数据中包含三个用户，登陆名为root，developer，seven，分别对应 上帝视角，开发人员，普通员工三个系统角色  
+
 
 **要求python版本为3.5+，使用到的第三方库：**  
  - tornado 作为基础框架
