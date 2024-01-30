@@ -1,5 +1,3 @@
-开场前，安利一下，其实 https://github.com/xiaowan/pyclient 这个项目也是蛮好用的呢...
-
 
 **简介**
 
